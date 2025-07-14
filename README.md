@@ -59,7 +59,4 @@ cd ResMatchAI
 4. Configure API Key
 Create a .env file at the root level:
 
-ini
-Copy
-Edit
 GEMINI_API_KEY=your_google_gemini_api_key
