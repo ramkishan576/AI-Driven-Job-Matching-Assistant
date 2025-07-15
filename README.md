@@ -1,62 +1,62 @@
-# AI-Driven-Job-Matching-Assistant
+project:
+  name: ResMatchAI
+  description: >
+    ResMatchAI is an AI-powered resume-to-job description matcher that automates candidate-job alignment using
+    Gemini 1.5 Flash (via LangChain) and BERT semantic similarity. Designed with modular architecture and FAANG-level standards.
 
-**ResMatchAI** is an AI-powered resume-to-job description matcher that helps automate and optimize candidate-job alignment using advanced language models (Gemini 1.5 Flash via LangChain) and semantic similarity (BERT). Built with FAANG-level architecture, this tool provides accurate skill matching, gap detection, and intelligent reasoning for resume screening and talent acquisition.
+features:
+  - Resume to JD comparison (PDF extraction)
+  - Dual AI Scoring (Gemini via LangChain + BERT)
+  - JD generation from keywords
+  - Real-time Streamlit interface
+  - Matching score, skill insights, and explanation
 
----
+tech_stack:
+  - Python
+  - Streamlit
+  - Google Gemini 1.5 Flash (via LangChain)
+  - SentenceTransformers (BERT)
+  - PyPDF2
+  - dotenv
 
-## Features
+architecture:
+  structure:
+    - extractor.py: PDF text extraction
+    - jd_generator.py: Generate JD from keywords
+    - matcher_bert.py: BERT-based matching engine
+    - langchain_gemini.py: LangChain + Gemini matcher
+    - main.py: Streamlit frontend app
+    - .env: API key
+    - requirements.txt: Dependencies
 
-- **Resume vs JD Comparison**  
-  Extracts resume text from PDF and compares it against any job description.
+usage:
+  setup:
+    - git clone https://github.com/your-username/ResMatchAI.git
+    - cd ResMatchAI
+    - python -m venv venv && source venv/bin/activate  # or venv\Scripts\activate on Windows
+    - pip install -r requirements.txt
+    - Create .env with: GEMINI_API_KEY=your_api_key
+  run:
+    - streamlit run main.py
 
-- **Dual AI Scoring Engine**  
-  - Gemini 1.5 Flash via LangChain for structured skill-based output  
-  - BERT for semantic similarity scoring (0–100%)
+api_limits:
+  gemini_free_tier:
+    limit: 15 requests per minute
+    message: Use retry logic or upgrade to a paid plan
 
-- **Real-Time Analysis**  
-  Built on Streamlit for seamless browser-based interaction.
+output:
+  gemini:
+    - Matching Score
+    - Matching Skills
+    - Missing Skills
+    - Explanation
+  bert:
+    - Semantic Similarity Score (0-100%)
 
-- **Output Highlights**  
-  - Matching Score  
-  - Matched & Missing Skills  
-  - Explanation for match results
+author:
+  name: Ramkishan Rohila
+  contact: ramkishannhr222@gmail.com
+  github: https://github.com/ramkishan576
 
-- **Modular & Extensible Architecture**  
-  Clean code separation (`extractor`, `bert`, `langchain`, `gemini`) ready for CI/CD and production integration.
-
----
-
-##  Project Structure
-
-
-
-
----
-
-##  Tech Stack
-
-| Technology         | Purpose                            |
-|--------------------|-------------------------------------|
-| Python             | Core programming language           |
-| Streamlit          | Web UI frontend                     |
-| Gemini 1.5 Flash   | Advanced LLM scoring (via LangChain)|
-| LangChain          | LLM prompt orchestration            |
-| SentenceTransformers | BERT embeddings & similarity     |
-| PyPDF2             | Resume text extraction              |
-| dotenv             | Secure API key management           |
-
----
-
-##  How to Run
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/your-username/ResMatchAI.git
-cd ResMatchAI
-
-
-4. Configure API Key
-Create a .env file at the root level:
-
-GEMINI_API_KEY=your_google_gemini_api_key
+license: MIT
+status: production-ready
