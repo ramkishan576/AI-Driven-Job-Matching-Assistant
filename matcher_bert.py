@@ -1,29 +1,17 @@
 from sentence_transformers import SentenceTransformer, util
 
 class BERTMatcher:
-    """
-    A class that calculates semantic similarity between resume and job description using BERT.
-    """
-
     def __init__(self):
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')
+        # Model ko CPU par forcefully load kar rahe hain to avoid meta tensor error
+        self.model = SentenceTransformer('all-MiniLM-L6-v2', device='cpu')
 
-    def calculate_score(self, resume_text: str, jd_text: str) -> float:
-        """
-        Compute similarity score between two texts.
-
-        Returns:
-            float: Percentage similarity score.
-        """
+    def calculate_score(self, resume_text, jd_text):
         if not resume_text or not jd_text:
             return 0.0
 
-        try:
-            resume_emb = self.model.encode(resume_text, convert_to_tensor=True)
-            jd_emb = self.model.encode(jd_text, convert_to_tensor=True)
-            similarity = util.pytorch_cos_sim(resume_emb, jd_emb)
-            score = float(similarity[0][0]) * 100
-            return round(score, 2)
-        except Exception as error:
-            print(f"BERT Matcher Error: {error}")
-            return 0.0
+        resume_embedding = self.model.encode(resume_text, convert_to_tensor=True)
+        jd_embedding = self.model.encode(jd_text, convert_to_tensor=True)
+
+        similarity = util.pytorch_cos_sim(resume_embedding, jd_embedding)
+        score = float(similarity[0][0]) * 100
+        return round(score, 2)
